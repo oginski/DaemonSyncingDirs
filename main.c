@@ -55,6 +55,16 @@ Case-sensitive synchronization
 Built-in locking: serialize multiple jobs running against the same network share
  */
 
+/*      ALGORITHM STEPS TODO:
+ * 1) Get dir names from argv and store in variables
+ * 2) ...
+ * 3)
+ * 4)
+ 
+ 
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -138,7 +148,7 @@ int main(int argc, char*argv[]) //main function, arg counter and arg vector
         daemon_logic();
 
         syslog(LOG_NOTICE, "First daemon started.");
-        //sleep(2);
+        sleep(2);
 
         break; //infinity loop ends
     }
