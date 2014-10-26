@@ -1,4 +1,6 @@
-    /* 
+/* some changes here*/ 
+
+/* 
  * File:   main.c
  * Author: GrzegorzOginski at gmail dot com
  *
