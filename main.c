@@ -1,5 +1,3 @@
-/* some changes here*/
-/* some changes */
 /* 
  * File:   main.c
  * Author: GrzegorzOginski at gmail dot com
@@ -56,10 +54,17 @@ Built-in locking: serialize multiple jobs running against the same network share
  */
 
 /*      ALGORITHM STEPS TODO:
- * 1) Get dir names from argv and store in variables
- * 2) Sync dirs
+ * 1) Get dirs names from argv and store in variables
+ * 2) Check las modifcation dates from all files and subfolders from both dirs
+ *      ) -xwr for all files
+ *      ) Copy newest files to other dir
+ *      ) +xwr for all files
+ * ) check md5sum for dirs after synchronization
+ * 
+ * 
+ *      
  * 3) exit success
- * 4)
+ *
  
  
  */
@@ -73,7 +78,6 @@ Built-in locking: serialize multiple jobs running against the same network share
 #include <sys/stat.h>
 #include <syslog.h>
 
-/* test*/
 static void skeleton_daemon() {
     pid_t pid = 0; // PID for future daemon process (orphaned and taken by init process)
     pid_t sid = 0; // Session ID for daemon process
@@ -123,6 +127,13 @@ static void skeleton_daemon() {
     /* Open the log file */
     openlog("DaemonSyncingDirsLog", LOG_PID, LOG_DAEMON);
 }
+
+void check_last_mod_date(){
+    
+   // http://www.jb.man.ac.uk/~slowe/cpp/lastmod.html
+    
+}
+
 
 void daemon_logic() {
 
