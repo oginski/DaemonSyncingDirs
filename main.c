@@ -55,18 +55,15 @@ Built-in locking: serialize multiple jobs running against the same network share
 
 /*      ALGORITHM STEPS TODO:
  * 1) Get dirs names from argv and store in variables
- * 2) Check las modifcation dates from all files and subfolders from both dirs
- *      ) -xwr for all files
+ * 2) Check las modifcation dates from all files and subfolders from both dirs      http://www.jb.man.ac.uk/~slowe/cpp/lastmod.html
+ *      ) -w for all files and folders (too avoid dependences when start synchro)
  *      ) Copy newest files to other dir
- *      ) +xwr for all files
- * ) check md5sum for dirs after synchronization
+ *      ) +w for all files and folders
+ * ) check md5sum for dirs after synchronization (should be the same)               http://stackoverflow.com/questions/1657232/how-can-i-calculate-an-md5-checksum-of-a-directory
  * 
  * 
  *      
- * 3) exit success
- *
- 
- 
+ * 3) exit success 
  */
 
 
@@ -77,6 +74,7 @@ Built-in locking: serialize multiple jobs running against the same network share
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <syslog.h>
+#include <time.h>
 
 static void skeleton_daemon() {
     pid_t pid = 0; // PID for future daemon process (orphaned and taken by init process)
@@ -128,12 +126,16 @@ static void skeleton_daemon() {
     openlog("DaemonSyncingDirsLog", LOG_PID, LOG_DAEMON);
 }
 
-void check_last_mod_date(){
-    
-   // http://www.jb.man.ac.uk/~slowe/cpp/lastmod.html
-    
+void check_last_mod_date(char *file) {
+    // http://www.jb.man.ac.uk/~slowe/cpp/lastmod.html
+    struct tm* clock; // create a time structure
+    struct stat attrib; // create a file attribute structure
+    stat(file, &attrib); // get the attributes of afile.txt
+    clock = gmtime(&(attrib.st_mtime)); // Get the last modified time and put it into the time structure
+    // clock->tm_year returns the year (since 1900)	
+    // clock->tm_mon returns the month (January = 0)
+    // clock->tm_mday returns the day of the month
 }
-
 
 void daemon_logic() {
 
