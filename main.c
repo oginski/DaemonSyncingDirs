@@ -1,7 +1,6 @@
 /* some changes here*/ 
 /* some changes */
-/* 333333333
- * 444444
+/* 
  * File:   main.c
  * Author: GrzegorzOginski at gmail dot com
  *
