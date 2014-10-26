@@ -57,8 +57,8 @@ Built-in locking: serialize multiple jobs running against the same network share
 
 /*      ALGORITHM STEPS TODO:
  * 1) Get dir names from argv and store in variables
- * 2) ...
- * 3)
+ * 2) Sync dirs
+ * 3) exit success
  * 4)
  
  
