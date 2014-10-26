@@ -126,15 +126,24 @@ static void skeleton_daemon() {
     openlog("DaemonSyncingDirsLog", LOG_PID, LOG_DAEMON);
 }
 
-void check_last_mod_date(char *file) {
+void mod_date(char *file) {
     // http://www.jb.man.ac.uk/~slowe/cpp/lastmod.html
     struct tm* clock; // create a time structure
     struct stat attrib; // create a file attribute structure
     stat(file, &attrib); // get the attributes of afile.txt
     clock = gmtime(&(attrib.st_mtime)); // Get the last modified time and put it into the time structure
-    // clock->tm_year returns the year (since 1900)	
-    // clock->tm_mon returns the month (January = 0)
-    // clock->tm_mday returns the day of the month
+
+    int day() {                 // clock->tm_mday returns the day of the month
+        return clock->tm_mday;
+    }
+
+    int year() {                // clock->tm_year returns the year (since 1900)	
+        return clock->tm_year;
+    }
+
+    int month() {
+        return clock->tm_mon;   // clock->tm_mon returns the month (January = 0)
+    }
 }
 
 void daemon_logic() {
