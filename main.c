@@ -1,4 +1,4 @@
-/* some changes here*/ 
+/* some changes here*/
 /* some changes */
 /* 
  * File:   main.c
@@ -64,11 +64,10 @@ Built-in locking: serialize multiple jobs running against the same network share
 #include <syslog.h>
 
 /* test*/
-static void skeleton_daemon()
-{
+static void skeleton_daemon() {
     pid_t pid = 0; // PID for future daemon process (orphaned and taken by init process)
     pid_t sid = 0; // Session ID for daemon process
-    
+
     /* Fork off the parent process */
     pid = fork();
 
@@ -106,29 +105,45 @@ static void skeleton_daemon()
     chdir("/");
 
     /* Close all open file descriptors */
-    int x=0;
-    for (x = sysconf(_SC_OPEN_MAX); x>0; x--)
-    {
-        close (x);
+    int x = 0;
+    for (x = sysconf(_SC_OPEN_MAX); x > 0; x--) {
+        close(x);
     }
 
     /* Open the log file */
-    openlog ("DaemonSyncingDirsLog", LOG_PID, LOG_DAEMON);
+    openlog("DaemonSyncingDirsLog", LOG_PID, LOG_DAEMON);
 }
 
-int main(int argc, char*argv[])  //main function, arg counter and arg vector
+void daemon_logic() {
+
+
+
+
+}
+
+int main(int argc, char*argv[]) //main function, arg counter and arg vector
 {
-    skeleton_daemon();  // let's the daemon begin
+    char *pathOne = argv[1], *pathTwo = argv[2]; //stores paths from command line
+
+    printf("argv[0], %s\n", argv[0]); //name of program
+    printf("FIRST PATH: %s\n", argv[1]); //first dir path
+    printf("SECOND PATH: %s\n", argv[2]); //second dir path
+    printf("argc: %d\n", argc);
+
+    skeleton_daemon(); // let's the daemon begin
 
     while (1) //infinity loop
     {
-        //TODO: Insert daemon code here.
-        syslog (LOG_NOTICE, "First daemon started.");
-        sleep (5);
+        //TODO: Insert daemon code here. Logic,
+        daemon_logic();
+
+        syslog(LOG_NOTICE, "First daemon started.");
+        //sleep(2);
+
         break; //infinity loop ends
     }
 
-    syslog (LOG_NOTICE, "First daemon terminated.");
+    syslog(LOG_NOTICE, "First daemon terminated.");
     closelog();
 
     return EXIT_SUCCESS;
